@@ -38,7 +38,7 @@ jobs:
                 "version": "%s",
                 "branch": "%s",
                 "sha": "%s"
-            }' "${INFLUXDB_VERSION}" "${CIRCLE_BRANCH}" "${CIRCLE_SHA1}" >"$(pwd)/.metadata.json"
+            }' "1.9.6" "1.9" "${CIRCLE_SHA1}" >"$(pwd)/.metadata.json"
 
             #
             # Prebuild the man pages so that consumers of the source tarball don't have to build it themselves.
@@ -84,9 +84,9 @@ jobs:
                 -o "${TMPOUTDIR}/$(basename $cmd)" \
                 -tags "netgo osusergo static_build" \
                 -ldflags="-s
-                  -X main.version=\"${INFLUXDB_VERSION}\"
-                  -X main.branch=\"${CIRCLE_BRANCH}\"
-                  -X main.commit=\"${CIRCLE_SHA1}\"
+                  -X main.version=1.9.6
+                  -X main.branch=1.9
+                  -X main.commit=${CIRCLE_SHA1}
                   -extldflags \"-fno-PIC -Wl,-z,stack-size=8388608\"" \
                 ${cmd}
             done
