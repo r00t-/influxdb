@@ -36,7 +36,7 @@ jobs:
             set -x
 
             INFLUXDB_COMMIT=$(git rev-parse --short HEAD)
-            INFLUXDB_VERSION=$(git describe --exact-match --tags HEAD 2>/dev/null || printf '%s' "${INFLUXDB_COMMIT}" | sed 's|^v||')
+            INFLUXDB_VERSION=$(git describe --tags HEAD 2>/dev/null || printf '%s' "${INFLUXDB_COMMIT}" | sed 's|^v||')
 
             printf '{
                 "version": "%s",
@@ -75,7 +75,7 @@ jobs:
             export CGO_ENABLED=1
 
             INFLUXDB_COMMIT=$(git rev-parse --short HEAD)
-            INFLUXDB_VERSION=$(git describe --exact-match --tags HEAD 2>/dev/null || printf '%s' "${INFLUXDB_COMMIT}" | sed 's|^v||')
+            INFLUXDB_VERSION=$(git describe --exact-match --tags HEAD 2>/dev/null || printf 'unknown' | sed 's|^v||')
 
             # linux amd64 (static build)
             TMPOUTDIR=$(mktemp -d)
